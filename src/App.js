@@ -129,27 +129,31 @@ const App = () => {
         setFeedback('Logged out successfully.');
     };
 
+    const leaveRoom = () => {
+        setCurrentRoom('');
+        setMessages([]);
+        setFeedback('');
+    };
+
     return (
-        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+        <div className="container">
             <h1>Chat Application</h1>
 
             {/* User Authentication */}
             {!isLoggedIn && (
-                <div>
-                    <h2>{feedback ? feedback.includes('successful') ? 'Login' : 'Register' : 'Register or Login'}</h2>
+                <div className="login">
+                    <h2>{feedback ? (feedback.includes('successful') ? 'Login' : 'Register') : 'Register or Login'}</h2>
                     <input
                         type="text"
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ margin: '5px' }}
                     />
                     <input
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ margin: '5px' }}
                     />
                     <div>
                         <label>
@@ -167,7 +171,7 @@ const App = () => {
                         </button>
                         <button onClick={loginUser}>Login</button>
                     </div>
-                    {feedback && <p style={{ color: feedback.includes('successful') ? 'green' : 'red' }}>{feedback}</p>}
+                    {feedback && <p className="feedback">{feedback}</p>}
                 </div>
             )}
 
@@ -177,11 +181,9 @@ const App = () => {
                     <h2>Available Chat Rooms</h2>
                     {chatRooms.length > 0 ? (
                         chatRooms.map((room) => (
-                            <div key={room} style={{ marginBottom: '10px' }}>
+                            <div key={room} className="chat-room-list">
                                 <span>{room}</span>
-                                <button onClick={() => joinRoom(room)} style={{ marginLeft: '10px' }}>
-                                    Join
-                                </button>
+                                <button onClick={() => joinRoom(room)}>Join</button>
                             </div>
                         ))
                     ) : (
@@ -194,7 +196,6 @@ const App = () => {
                         placeholder="Room Name"
                         value={roomName}
                         onChange={(e) => setRoomName(e.target.value)}
-                        style={{ margin: '5px' }}
                     />
                     <button onClick={createRoom}>Create Room</button>
                 </div>
@@ -202,36 +203,37 @@ const App = () => {
 
             {/* Chat Room */}
             {isLoggedIn && currentRoom && (
-                <div>
+                <div className="chat-room">
+                    <span className="home-icon" onClick={leaveRoom} title="Leave Room">
+                        🏠
+                    </span>
                     <h2>Room: {currentRoom}</h2>
-                    <div
-                        style={{
-                            border: '1px solid #ccc',
-                            padding: '10px',
-                            maxHeight: '300px',
-                            overflowY: 'auto',
-                            marginBottom: '10px',
-                        }}
-                    >
+                    <div className="messages-container">
                         {messages.map((msg, index) => (
-                            <p key={index}>
-                                <strong>{msg.username}</strong>: {msg.text} <small>({msg.timestamp})</small>
-                            </p>
+                            <div className="message-box" key={index}>
+                                <div className="message-text">
+                                    <strong>{msg.username}</strong>: {msg.text}
+                                </div>
+                                <div className="timestamp">{msg.timestamp}</div>
+                            </div>
                         ))}
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Type a message"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        style={{ margin: '5px' }}
-                    />
-                    <button onClick={sendMessage}>Send</button>
+                    <div className="message-input-container">
+                        <input
+                            type="text"
+                            placeholder="Type a message"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                        />
+                        <button className="send-btn" onClick={sendMessage}>
+                            Send
+                        </button>
+                    </div>
                 </div>
             )}
 
             {isLoggedIn && (
-                <button onClick={logoutUser} style={{ marginTop: '20px', backgroundColor: '#ff6464' }}>
+                <button onClick={logoutUser} className="logout-btn">
                     Logout
                 </button>
             )}
