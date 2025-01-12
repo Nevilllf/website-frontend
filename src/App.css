@@ -1,123 +1,170 @@
 /* General Styling */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   background: linear-gradient(to right, #8360c3, #2ebf91);
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  animation: gradientAnimation 10s ease infinite;
 }
 
-.chat-container {
-  width: 95%; /* Increased width */
-  max-width: 800px; /* Wider max-width */
+.container {
+  width: 95%;
+  max-width: 800px;
   background: #1e1e2f;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  height: 70vh; /* Set a fixed height relative to the viewport */
-}
-
-/* Username Selection */
-.username-container {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   padding: 20px;
   text-align: center;
 }
 
-.username-input {
-  width: 80%;
-  padding: 10px;
+h1, h2 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+input {
+  width: calc(100% - 40px);
+  max-width: 400px;
+  padding: 12px;
   margin: 10px 0;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   outline: none;
+  background: #2b2b3b;
+  color: #fff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
 }
 
-.btn {
-  padding: 10px 20px;
+input::placeholder {
+  color: #bbb;
+}
+
+input:focus {
+  outline: 2px solid #2ebf91;
+  outline-offset: 2px;
+}
+
+button {
+  padding: 12px 25px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  background: #2ebf91;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
 }
 
-.btn.primary {
+button:hover {
+  background: #25a978;
+}
+
+button:focus {
+  outline: 2px solid #2ebf91;
+  outline-offset: 2px;
+}
+
+.feedback {
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid #ff6464;
+  border-radius: 5px;
+  padding: 10px;
+  color: #ff6464;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Authentication Sections */
+.registration, .login {
+  margin: 20px auto;
+  padding: 30px;
+  background: #2b2b3b;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Chat Room List */
+.chat-room-list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2b2b3b;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.chat-room-list div.active {
   background: #2ebf91;
   color: #fff;
 }
 
-.btn.primary:hover {
-  background: #25a978;
-}
-
 /* Chat Room */
 .chat-room {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  height: 70vh;
   justify-content: space-between;
+  background: #1e1e2f;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .messages-container {
-  flex-grow: 1; /* Allow the messages container to take up remaining space */
-  max-height: calc(100% - 60px); /* Prevent overlapping with input */
+  flex-grow: 1;
+  max-height: 50vh;
   overflow-y: auto;
   background: #2b2b3b;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
-.message {
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.my-message {
-  background: #2ebf91;
-  color: #fff;
-  align-self: flex-end;
-}
-
-.other-message {
-  background: #8360c3;
-  color: #fff;
-}
-
-/* Message Input */
 .message-input-container {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  position: sticky;
+  bottom: 0;
+  background: #1e1e2f;
+  padding: 10px;
 }
 
-.message-input {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  font-size: 16px;
+/* Responsive Design */
+@media (max-width: 600px) {
+  .container, .registration, .login, .chat-room {
+    width: 100%;
+    padding: 15px;
+  }
+
+  input {
+    width: calc(100% - 30px);
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .messages-container {
+    font-size: 12px;
+  }
 }
 
-.send-btn {
-  padding: 12px 20px;
-  background: #2ebf91;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.send-btn:hover {
-  background: #25a978;
+/* Background Animation */
+@keyframes gradientAnimation {
+  0% { background: linear-gradient(to right, #8360c3, #2ebf91); }
+  50% { background: linear-gradient(to right, #2ebf91, #8360c3); }
+  100% { background: linear-gradient(to right, #8360c3, #2ebf91); }
 }
