@@ -14,7 +14,7 @@ body {
 .container {
   width: 95%;
   max-width: 900px;
-  background: rgba(30, 30, 47, 0.95); /* Subtle transparency */
+  background: rgba(30, 30, 47, 0.95);
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -28,7 +28,7 @@ h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
   font-weight: 700;
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 h2 {
@@ -78,12 +78,22 @@ button:hover {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
 }
 
+button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
 /* Feedback Message */
 .feedback {
-  color: #f06464;
-  margin-top: 10px;
-  font-size: 14px;
-  font-weight: 500;
+  color: #ff8080;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  font-weight: 600;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Authentication Sections */
@@ -96,6 +106,7 @@ button:hover {
   width: 90%;
   max-width: 500px;
   text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Chat Room List */
@@ -137,8 +148,9 @@ button:hover {
 
 /* Active Room Highlight */
 .chat-room-list div.active {
-  background: linear-gradient(to right, #2575fc, #6a11cb);
+  background: linear-gradient(to right, #ff7eb3, #ff758c);
   color: #fff;
+  font-weight: 600;
 }
 
 /* Chat Room */
@@ -176,6 +188,7 @@ button:hover {
   flex-direction: column;
   position: relative;
   color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .message-box .message-text {
@@ -245,4 +258,52 @@ button:hover {
   0% { background: linear-gradient(to right, #6a11cb, #2575fc); }
   50% { background: linear-gradient(to right, #2575fc, #6a11cb); }
   100% { background: linear-gradient(to right, #6a11cb, #2575fc); }
+}
+
+/* Smooth Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .container, .registration, .login, .chat-room {
+    width: 100%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  input {
+    width: calc(100% - 30px);
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .message-box {
+    font-size: 14px;
+  }
+
+  .message-input {
+    padding: 10px;
+  }
+
+  .send-btn {
+    padding: 10px 20px;
+  }
+
+  .home-icon {
+    font-size: 18px;
+    padding: 8px;
+  }
 }

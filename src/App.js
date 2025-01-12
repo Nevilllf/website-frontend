@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import './App.css';
@@ -18,6 +18,22 @@ const App = () => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [feedback, setFeedback] = useState('');
+
+    // References
+    const messagesEndRef = useRef(null);
+    const messageInputRef = useRef(null);
+
+    // Function to scroll to the bottom of the messages
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Adjust padding when the keyboard opens (mobile-specific)
+    const handleKeyboardShow = () => {
+        if (messageInputRef.current) {
+            messageInputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
 
     // Auto-login if token exists
     useEffect(() => {
@@ -64,6 +80,11 @@ const App = () => {
             return () => socket.disconnect();
         }
     }, [currentRoom]);
+
+    // Scroll to the bottom when messages change
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const registerUser = () => {
         axios
@@ -139,7 +160,6 @@ const App = () => {
         <div className="container">
             <h1>Chat Application</h1>
 
-            {/* User Authentication */}
             {!isLoggedIn && (
                 <div className="login">
                     <h2>{feedback ? (feedback.includes('successful') ? 'Login' : 'Register') : 'Register or Login'}</h2>
@@ -175,7 +195,6 @@ const App = () => {
                 </div>
             )}
 
-            {/* Chat Room Management */}
             {isLoggedIn && !currentRoom && (
                 <div>
                     <h2>Available Chat Rooms</h2>
@@ -201,7 +220,6 @@ const App = () => {
                 </div>
             )}
 
-            {/* Chat Room */}
             {isLoggedIn && currentRoom && (
                 <div className="chat-room">
                     <span className="home-icon" onClick={leaveRoom} title="Leave Room">
@@ -217,6 +235,7 @@ const App = () => {
                                 <div className="timestamp">{msg.timestamp}</div>
                             </div>
                         ))}
+                        <div ref={messagesEndRef}></div>
                     </div>
                     <div className="message-input-container">
                         <input
@@ -224,6 +243,8 @@ const App = () => {
                             placeholder="Type a message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
+                            onFocus={handleKeyboardShow} // Smooth scroll to input when focused
+                            ref={messageInputRef}
                         />
                         <button className="send-btn" onClick={sendMessage}>
                             Send
