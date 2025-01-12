@@ -1,38 +1,123 @@
-.App {
+/* General Styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #8360c3, #2ebf91);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.chat-container {
+  width: 95%; /* Increased width */
+  max-width: 800px; /* Wider max-width */
+  background: #1e1e2f;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* Set a fixed height relative to the viewport */
+}
+
+/* Username Selection */
+.username-container {
+  padding: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.username-input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.btn.primary {
+  background: #2ebf91;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #25a978;
+}
+
+/* Chat Room */
+.chat-room {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.messages-container {
+  flex-grow: 1; /* Allow the messages container to take up remaining space */
+  max-height: calc(100% - 60px); /* Prevent overlapping with input */
+  overflow-y: auto;
+  background: #2b2b3b;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.my-message {
+  background: #2ebf91;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.other-message {
+  background: #8360c3;
+  color: #fff;
+}
+
+/* Message Input */
+.message-input-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.message-input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.send-btn {
+  padding: 12px 20px;
+  background: #2ebf91;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background: #25a978;
 }
