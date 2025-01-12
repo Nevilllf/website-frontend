@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 const App = () => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/message')
-            .then((response) => setMessage(response.data.message))
-            .catch((error) => console.error('Error fetching the message:', error));
+        axios.get('`${API_URL}/api/message`')
+    .then(response => console.log(response.data))
+    .catch(error => console.error(error));
+
     }, []);
 
     return (
