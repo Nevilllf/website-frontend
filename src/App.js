@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = process.env.REACT_APP_BACKEND_URL; // Backend URL from .env
 
 const App = () => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        axios.get('`${API_URL}/api/message`')
-    .then(response => console.log(response.data))
-    .catch(error => console.error(error));
-
+        axios.get(`${API_URL}/api/message`) // Corrected string interpolation
+            .then(response => {
+                setMessage(response.data.message); // Set the message from the API
+            })
+            .catch(error => {
+                console.error('Error fetching the message:', error);
+            });
     }, []);
 
     return (
