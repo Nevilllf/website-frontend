@@ -35,6 +35,14 @@ const App = () => {
         }
     };
 
+    // Add this function to handle the Enter key press
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    };
+
+
     // Auto-login if token exists
     useEffect(() => {
         if (token) {
@@ -158,7 +166,7 @@ const App = () => {
 
     return (
         <div className="container">
-            <h1>Chat Application</h1>
+            <h1>BaatChit</h1>
 
             {!isLoggedIn && (
                 <div className="login">
@@ -244,6 +252,7 @@ const App = () => {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             onFocus={handleKeyboardShow} // Smooth scroll to input when focused
+                            onKeyPress={handleKeyPress} // Trigger sendMessage on Enter key press
                             ref={messageInputRef}
                         />
                         <button className="send-btn" onClick={sendMessage}>
